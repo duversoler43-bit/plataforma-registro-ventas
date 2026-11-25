@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Panel principal</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      margin: 0;
+      padding: 24px;
+    }
+    .topbar {
+      background: #ffffff;
+      padding: 16px 24px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+    .btn-salir {
+      padding: 8px 14px;
+      background-color: #dc2626;
+      color: #ffffff;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn-salir:hover {
+      background-color: #b91c1c;
+    }
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    .card {
+      background: #ffffff;
+      padding: 20px;
+      border-radius: 10px;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    }
+    .card h2 {
+      font-size: 16px;
+      margin-top: 0;
+      margin-bottom: 8px;
+    }
+    .card p {
+      font-size: 14px;
+      color: #555;
+      margin: 0 0 12px 0;
+    }
+    .card a {
+      color: #2563eb;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: bold;
+    }
+    .card a:hover {
+      text-decoration: underline;
+    }
+    #estadoPanel {
+      margin-bottom: 14px;
+      font-size: 14px;
+      color: #333;
+    }
+  </style>
+</head>
+<body>
+  <div class="topbar">
+    <h1>Panel principal</h1>
+    <button class="btn-salir" id="btnCerrarSesion" type="button">Cerrar sesión</button>
+  </div>
+
+  <div id="estadoPanel">Bienvenido al panel.</div>
+
+  <div class="grid">
+    <div class="card">
+      <h2>Verificar cuenta</h2>
+      <p>Confirma tu correo y el código de verificación.</p>
+      <a href="/verificar-cuenta.html">Ir a verificar cuenta</a>
+    </div>
+
+    <div class="card">
+      <h2>Recuperar usuario</h2>
+      <p>Consulta tu usuario asociado al correo registrado.</p>
+      <a href="/recuperar-usuario.html">Ir a recuperar usuario</a>
+    </div>
+
+    <div class="card">
+      <h2>Políticas</h2>
+      <p>Revisa los términos y políticas del sistema.</p>
+      <a href="/politicas.html">Ver políticas</a>
+    </div>
+  </div>
+
+  <script>
+    const estadoPanel = document.getElementById('estadoPanel');
+    const btnCerrarSesion = document.getElementById('btnCerrarSesion');
+
+    btnCerrarSesion.addEventListener('click', () => {
+      estadoPanel.textContent = 'Sesión cerrada.';
+      window.location.href = '/login.html';
+    });
+  </script>
+</body>
+</html>

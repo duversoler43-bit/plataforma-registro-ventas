@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Crear cuenta</title>
+</head>
+<body>
+  <h1>Crear cuenta</h1>
+  <form id="formCrearCuenta">
+    <label>
+      Nombre:
+      <input type="text" name="nombre" required />
+    </label>
+    <br /><br />
+    <label>
+      Correo:
+      <input type="email" name="correo" required />
+    </label>
+    <br /><br />
+    <label>
+      Contraseña:
+      <input type="password" name="contrasena" required />
+    </label>
+    <br /><br />
+    <button type="submit">Registrarse</button>
+  </form>
+  <p id="respuesta"></p>
+
+  <script>
+    const form = document.getElementById('formCrearCuenta');
+    const respuesta = document.getElementById('respuesta');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const datos = Object.fromEntries(new FormData(form).entries());
+      const res = await fetch('/api/crear-cuenta', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(datos)
+      });
+      const data = await res.json();
+      respuesta.textContent = data.mensaje;
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Recuperar usuario</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f6f9;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      min-height: 100vh;
+      margin: 0;
+    }
+    .card {
+      background: #ffffff;
+      padding: 24px;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+      width: 100%;
+      max-width: 380px;
+    }
+    h1 {
+      font-size: 20px;
+      margin-top: 0;
+      margin-bottom: 12px;
+    }
+    p {
+      font-size: 14px;
+      color: #555;
+      margin-bottom: 18px;
+    }
+    label {
+      display: block;
+      font-size: 14px;
+      margin-bottom: 6px;
+      font-weight: bold;
+    }
+    input {
+      width: 100%;
+      padding: 10px;
+      margin-bottom: 14px;
+      border: 1px solid #ccc;
+      border-radius: 6px;
+      box-sizing: border-box;
+      font-size: 14px;
+    }
+    button {
+      width: 100%;
+      padding: 11px;
+      background-color: #2563eb;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 15px;
+      cursor: pointer;
+    }
+    button:hover {
+      background-color: #1d4ed8;
+    }
+    #mensaje {
+      margin-top: 14px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <div class="card">
+    <h1>Recuperar usuario</h1>
+    <p>Ingresa tu correo electrónico registrado para consultar o recuperar tu usuario.</p>
+
+    <form id="formRecuperarUsuario">
+      <label for="correo">Correo electrónico</label>
+      <input type="email" id="correo" name="correo" required placeholder="correo@ejemplo.com" />
+
+      <button type="submit">Recuperar usuario</button>
+    </form>
+
+    <div id="mensaje"></div>
+  </div>
+
+  <script>
+    const form = document.getElementById('formRecuperarUsuario');
+    const mensaje = document.getElementById('mensaje');
+
+    form.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      mensaje.textContent = 'Consultando...';
+
+      const correo = document.getElementById('correo').value.trim();
+
+      try {
+        const res = await fetch('/api/recuperar-usuario', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ correo })
+        });
+
+        const data = await res.json();
+        mensaje.style.color = res.ok ? 'green' : 'crimson';
+        mensaje.textContent = data.mensaje || (res.ok ? 'Solicitud enviada.' : 'No se pudo procesar.');
+      } catch (error) {
+        mensaje.style.color = 'crimson';
+        mensaje.textContent = 'Error de conexión con el servidor.';
+      }
+    });
+  </script>
+</body>
+</html>
