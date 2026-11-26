@@ -1,0 +1,5 @@
+$kind: http-request
+description: ""
+url: GET http://localhost:3000/api/ventas
+method: GET
+order: 3000

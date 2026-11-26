@@ -1,0 +1,23 @@
+$kind: http-request
+name: POST - Registrar venta.
+description: ""
+url: http://localhost:3000/api/ventas
+method: GET
+body:
+  type: json
+  content: "{\r
+
+    \  \"cliente\": \"Carlos Rodriguez\",\r
+
+    \  \"producto\": \"Teclado inalambrico\",\r
+
+    \  \"cantidad\": 2,\r
+
+    \  \"precioUnitario\": 45000,\r
+
+    \  \"fecha\": \"2026-11-24\"\r
+
+    }\r
+
+    \r\n"
+order: 2000
